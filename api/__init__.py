@@ -4,6 +4,7 @@ from .products.views import product_namespace
 from .sales.views import sales_namespace
 from .users.views import user_namespace
 from .common.views import summary_namespace
+from .roles.views import roles_namespace
 from flask_restx import Api
 from .config.config import config_dict
 from .utils import db
@@ -37,6 +38,7 @@ def create_app(config=config_dict['dev']):
     api.add_namespace(product_namespace, path='/product')
     api.add_namespace(sales_namespace, path='/sale')
     api.add_namespace(summary_namespace, path='/summary')
+    api.add_namespace(roles_namespace)
 
 
     @app.shell_context_processor

@@ -90,13 +90,14 @@ class SummaryView(Resource):
                 })
            
             total_sales_rev = db.session.query(func.sum(Sale.sale_amount)).scalar()
+            
 
             # If you want to handle cases where there are no sales (result might be None)
-            total_sales_rev = total_sales_rev or 0
+            # total_sales_rev = {"total_sales_rev": total_sales_rev or 0}
 
             total_sales=Sale.query.count()
 
-            print(total_sales_rev, total_sales)
+            print(total_sales_rev)
 
 
             response_data = {
@@ -105,7 +106,7 @@ class SummaryView(Resource):
                 'low_quantity_products': marshal(low_quantity_result, product_model),
                 'weekly_sales': marshal(weekly_sales, weeklysale),
 
-                'total_sales_rev': marshal(total_sales_rev, revnue_model),
+                'total_sales_rev': int(total_sales_rev),
                 'total_sales':total_sales
             }
 
@@ -129,7 +130,8 @@ class SummaryProductView(Resource):
             .distinct()
             .count()
         )
-        return {'total_products': total_products, 'category_count': category_count}
+        low_quantity_result = Product.query.filter(Product.quantity < 10).count()
+        return {'total_products': total_products, 'category_count': category_count, 'low_quantity_products': low_quantity_result}
 
 
 
