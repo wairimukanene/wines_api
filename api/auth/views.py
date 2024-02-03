@@ -39,7 +39,7 @@ class AuthLogin(Resource):
         user=User.query.filter_by(username=username).first()
 
         if user is not None and check_password_hash(user.password, data.get('password')):
-            access_token =create_access_token(identity=user.username)
+            access_token =create_access_token(identity=user.username, additional_claims={"role": user.role_id})
             refresh_token =create_refresh_token(identity=user.username)
 
 
