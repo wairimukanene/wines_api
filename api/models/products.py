@@ -11,8 +11,8 @@ class Product(db.Model):
     buying_price = db.Column(db.DECIMAL(10, 2), nullable=False)
     price = db.Column(db.DECIMAL(10, 2), nullable=False)
     description = db.Column(db.Text, nullable=True)
-    created_at = db.Column(db.Date, default=date.today())  # Use datetime.date.today() for date-only value
-    updated_at = db.Column(db.Date, onupdate=date.today())
+    created_at = db.Column(db.Date, default=date.today)  # Use datetime.date.today() for date-only value
+    updated_at = db.Column(db.Date, onupdate=date.today)
 
     def __repr__(self):
 
