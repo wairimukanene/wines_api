@@ -9,8 +9,8 @@ class Sale(db.Model):
     product_name = db.Column(db.String, nullable=False)
     quantity = db.Column(db.Integer(), nullable=False)
     product_id = db.Column(db.Integer, db.ForeignKey("products.id"), nullable=True)  # Foreign key to product
-    created_at = db.Column(db.Date, default=date.today())  # Use datetime.date.today() for date-only value
-    updated_at = db.Column(db.Date, onupdate=date.today())
+    created_at = db.Column(db.Date, default=date.today)  # Use datetime.date.today() for date-only value
+    updated_at = db.Column(db.Date, onupdate=date.today)
 
     # Relationship to Product model
     product = db.relationship("Product", backref="sales")
